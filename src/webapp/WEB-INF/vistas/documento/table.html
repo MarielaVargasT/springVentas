@@ -1,0 +1,25 @@
+<table id="dtdoc" class="table table-bordered table-hover table-striped table-condensed" style="font-size: 14px">
+    <thead>
+        <tr>
+            <th width="10%">Codigo</th>
+            <th width="60%">Nombre</th>
+            <th width="30%">Control</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="model : ${documentos}">
+            <td th:text="${model.id}"></td>
+            <td th:text="${model.nombre}"></td>
+            <td class="pad-no">
+                <div class="form-group">
+                    <a th:href="@{edit(clave=${model.id})}" data-original-title="Editar" class="btn btn-default btn-hover-info btn-xs glyphicon glyphicon-edit"
+                        data-toggle="tooltip" data-placement="top" title="Editar documento">
+                    </a>
+                    <a th:href="@{delete(clave=${model.id})}" data-original-title="Eliminar" class="btn btn-default btn-hover-info btn-xs glyphicon glyphicon-trash"
+                        data-toggle="tooltip" data-placement="top" title="Eliminar documento">
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

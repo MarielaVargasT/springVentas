@@ -1,0 +1,29 @@
+<table id="dtdoc" class="table table-bordered table-hover table-striped table-condensed" style="font-size: 14px">
+    <thead>
+        <tr>
+            <th width="10%">Codigo</th>
+            <th width="10%">DNI</th>
+            <th width="40%">Apellidos y Nombres</th>
+            <th width="20%">Direccion</th>
+            <th width="20%">Control</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="model : ${clientes}">
+            <td th:text="${model.id}"></td>
+            <td th:text="${model.dni}"></td>
+            <td th:text="${model.apellidos}"></td>
+            <td th:text="${model.direccion}"></td>
+            <td class="pad-no">
+                <div class="form-group">
+                    <a th:href="@{edit(clave=${model.id})}" data-original-title="Editar" class="btn btn-default btn-hover-info btn-xs glyphicon glyphicon-edit"
+                        data-toggle="tooltip" data-placement="top" title="Editar cliente">
+                    </a>
+                    <a th:href="@{delete(clave=${model.id})}" data-original-title="Eliminar" class="btn btn-default btn-hover-info btn-xs glyphicon glyphicon-trash"
+                        data-toggle="tooltip" data-placement="top" title="Eliminar cliente">
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

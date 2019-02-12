@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head data-th-replace="fragments/sb-admin :: headmk">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div data-th-replace="fragments/sb-admin :: top-nav"></div>
+        <div data-th-replace="fragments/sb-admin :: vert-nav-admin"></div>
+        <div id="page-wrapper">
+            <div data-th-replace="fragments/index :: page-wrapper (name='Nuevo Documento', list='Listado de Documento', view='documento/table')"></div>
+        </div>
+    </div> <!-- /#wrapper -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" data-th-src="@{/static/js/jquery-1.11.0.min.js}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" data-th-src="@{/static/js/bootstrap-3.1.1.min.js}"></script>
+
+    <!-- Core Scripts - Include with every page -->
+    <script type="text/javascript" data-th-src="@{/static/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+
+    <!-- SB Admin Scripts - Include with every page -->
+    <script type="text/javascript" data-th-src="@{/static/js/sb-admin.js}"></script>
+
+</body>
+
+</html>

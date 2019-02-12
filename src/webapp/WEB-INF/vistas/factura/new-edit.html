@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head data-th-replace="fragments/sb-admin :: headmk">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div data-th-replace="fragments/sb-admin :: top-nav"></div>
+        <div data-th-replace="fragments/sb-admin :: vert-nav-admin"></div>
+
+        <div id="page-wrapper">
+            <div class="col-md-12" style="margin-top:20px">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"> <span th:text="${editar}"></span> Venta</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" th:object="${factura}" th:action="${url}" method="POST">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="form-group col-sm-6">
+                                <label class="col-md-2 control-label" for="cbocliente">Cliente</label>
+                                <div class="col-md-10">
+                                    <select class="form-control" id="cbocliente" name="cliente" th:field="*{cliente}">
+                                        <option value="">Seleccionar Cliente</option>
+                                        <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.apellidos+' '+c.nombres+' (DNI:'+c.dni+')'}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label class="col-md-5 control-label" for="cbodocumento">Tipo de Documento</label>
+                                <div class="col-md-7">
+                                    <select class="form-control" id="cbodocumento" name="documento" th:field="*{documento}">
+                                        <option value="">Selecciona Tipo de Documento</option>
+                                        <option th:each="doc : ${documentos}" th:value="${doc.id}" th:text="${doc.nombre}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-5 control-label" for="txtfecha">Nro de Doc:</label>
+                                <div class="col-md-7">
+                                    <input id="txtfecha" name="fecha" type="text" th:field="*{fecha}" class="form-control input-md"
+                                        disabled>
+                                    <!-- <p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="col-md-2 control-label" for="txtfecha">Fecha:</label>
+                                <div class="col-md-8">
+                                    <input id="txtfecha" name="fecha" type="text" th:field="*{fecha}" class="form-control input-md"
+                                        disabled>
+                                    <!-- <p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <div class="col-md-12">
+                                    <button id="badd" name="" class="btn btn-success" type="button">
+                                        <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Agregar Productos</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12" id="detalle">
+                                <table id="detalleprod" class="table table-bordered table-hover table-striped table-condensed"
+                                    style="font-size: 14px">
+                                    <thead>
+                                        <tr>
+                                            <th width="3%">Codigo</th>
+                                            <th width="20%">Descripcion</th>
+                                            <th width="10%">Precio Unit.</th>
+                                            <th width="10%">Cantidad</th>
+                                            <th width="10%">Precio Total</th>
+                                            <th width="2%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tdetbody">
+                                        <tr id="total">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><b>TOTAL</b></td>
+                                            <td id="totalsum"></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="baceptar"></label>
+                                <div class="col-md-8">
+                                    <button id="baceptar" name="" class="btn btn-primary" type="submit">Grabar Venta</button>
+                                    <a th:href="@{'/factura/index'}" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" id="modalDefault" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document" id="modal">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="lbleditmodal" style="font-weight: bold;"> <i class="fa fa-fw fa-pencil-square"></i>
+                        Seleccionar Productos </h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idtb" value="1">
+                    <div class="box-body">
+                        <div data-th-replace="fragments/index :: page-wrapper (list='Listado de Productos', view='producto/table', add='true')"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                        Guardar</button> -->
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-sign-out"
+                            aria-hidden="true"></i> Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" data-th-src="@{../static/js/jquery-1.11.0.min.js}"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" data-th-src="@{../static/js/bootstrap-3.1.1.min.js}"></script>
+    <script>
+        $("#badd").on('click', function (event) {
+            event.preventDefault();
+            $('#modalDefault').modal('show');
+        });
+        $("#detalle").on('click', function (event) {
+            
+        });
+    </script>
+</body>
+
+</html>

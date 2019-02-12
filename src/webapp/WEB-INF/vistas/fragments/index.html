@@ -1,0 +1,22 @@
+<div class="container-fluid" data-th-fragment="page-wrapper">
+    <div class="clearfix"></div>
+    <div class="row" style="margin-top:20px">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="btn-group pull-right">
+                    <form action="new" th:if="${name}">
+                        <button th:text="${name}" class="btn btn-primary" type="submit"></button>
+                    </form>
+                </div>
+                <h4 th:text="${list}"></h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div data-th-insert="${view}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head data-th-replace="fragments/sb-admin :: headmk">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div data-th-replace="fragments/sb-admin :: top-nav"></div>
+        <div data-th-replace="fragments/sb-admin :: vert-nav-admin"></div>
+
+        <div id="page-wrapper">
+            <div class="col-md-6 col-md-offset-2" style="margin-top:20px">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><span th:text="${editar}"></span> Producto</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" th:object="${producto}" th:action="${url}" method="POST">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="form-group">
+								<label class="col-md-4 control-label" for="tnombre">Nombre:</label>
+								<div class="col-md-6">
+									<input id="txtnombre" name="nombre" type="text"
+										th:field="*{nombre}" class="form-control input-md">
+										<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+								</div>
+							</div>
+
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="txtstock">Stock:</label>
+								<div class="col-md-6">
+									<input id="txtstock" name="stock" type="text"
+										th:field="*{stock}" class="form-control input-md">
+										<p th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></p>
+								</div>
+                            </div>
+                            
+                            <!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="txtprecio">Precio:</label>
+								<div class="col-md-6">
+									<input id="txtprecio" name="precio" type="text"
+										th:field="*{precio}" class="form-control input-md">
+										<p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="cbocategoria">Categoria</label>
+								<div class="col-md-6">
+									<select class="form-control" id="cbocategoria"
+										name="categoria" th:field="*{categoria}">
+										<option value="">Selecciona Categoria</option>
+										<option th:each="c : ${categorias}" th:value="${{c}}"
+											th:text="${c.denominacion}"></option>
+									</select>
+								</div>
+							</div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="baceptar"></label>
+                                <div class="col-md-8">
+                                    <button id="baceptar" name="" class="btn btn-primary" type="submit">Guardar</button>
+                                    <a th:href="@{'/producto/index'}" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

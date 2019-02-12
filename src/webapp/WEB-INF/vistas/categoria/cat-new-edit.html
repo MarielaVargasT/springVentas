@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head data-th-replace="fragments/sb-admin :: headmk">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div data-th-replace="fragments/sb-admin :: top-nav"></div>
+        <div data-th-replace="fragments/sb-admin :: vert-nav-admin"></div>
+
+        <div id="page-wrapper">
+            <div class="col-md-6 col-md-offset-2" style="margin-top:20px">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><span th:text="${editar}"></span> Categoria</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" th:object="${categoria}" th:action="${url}" method="POST">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="tdenominacion">Denominacion:</label>
+                                <div class="col-md-6">
+                                    <input id="txtdenominacion" name="denominacion" type="text" placeholder="" th:field="*{denominacion}" class="form-control input-md" required="">
+                                    <p th:if="${#fields.hasErrors('denominacion')}" th:errors="*{denominacion}"></p>
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="baceptar"></label>
+                                <div class="col-md-8">
+                                    <button id="baceptar" name="" class="btn btn-primary" type="submit">Guardar</button>
+                                    <a th:href="@{'/categoria/index'}" class="btn btn-danger">Cancelar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
